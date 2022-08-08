@@ -11,6 +11,11 @@ class Login {
     std::map<std::string, std::string> map_of_users;
     
 public:
+    bool validPassword(std::string word) {
+        if (word.size() < 6) return 0;
+        else return 1;
+    }
+    
     void user() {
         do {
             std::cout << "Username: ";
@@ -22,8 +27,14 @@ public:
                 std::cout << "Username already exists.\n";
             }
         } while (map_of_users.find(username) != map_of_users.end());
-        std::cout << "Password: ";
-        std::cin >> password;
+         do {
+            std::cout << "Password: ";
+            std::cin >> password;
+            if (validPassword(password) == 1) break;
+            else {
+                std::cout << "Password must be atleast 6 characters long.\n";
+            }
+        } while (validPassword(password) == 0);
         // Saves inserted valid username and password inside map container (map_of_users).
         map_of_users.insert({ username, password });
     }
